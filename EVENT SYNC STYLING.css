@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple CSS Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #1e90ff;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    button {
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 2px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #104e8b;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Welcome to Event Sync!</h1>
+<p>This is a simple HTML and CSS example.</p>
+
+<button>Click Me!</button>
+
+</body>
+</html>
