@@ -2,25 +2,26 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DBIT EventSync</title>
         <link rel="stylesheet" href="EVENT SYNC STYLING.css">
     </head>
     <body>
         <header>
-            <h1 href="#">
-                <span style="color: white;">resurrected now DBIT</span>
+            <h1>
+                <span style="color: white;">DBIT</span>
                 <span class="website_title_1">Event</span><span class="website_title_2">Sync</span>
             </h1><br>
             <nav class="nav_bar">
                 <div class="nav_division">
                     <ul>
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Setup Kar</a></li>
-                        <button><a href="#">User Login</a></button> 
-                        <button><a href="#">Student Head Login</a></button>
-                        <button><a href="#">Faculty Login</a></button>
+                        <li><a href="#">Ongoing Events</a></li>
+                        <li><a href="#">Future Events</a></li>
+                        <li>
+                            <button onclick="document.getElementById('signInModal').style.display='block'">Sign in</button>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -28,14 +29,26 @@
         
         <div class="bg">
             <div class="content">
-                <h1><span>WELCOME<span></h1>
-               
+                <h1><span>WELCOME</span></h1>
             </div>
         </div>
-        <main>
-            
-        </main>
-
+        
+        <!-- Sign-in Form Modal -->
+        <div id="signInModal" style="display: none;">
+            <div style="padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2); width: 300px; margin: 50px auto;">
+                <h2>Sign In</h2>
+                <form id="signInForm">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    
+                    <button type="submit">Sign In</button>
+                </form>
+                <p id="message" style="color: green;"></p>
+                <button onclick="document.getElementById('signInModal').style.display='none'">Close</button>
+            </div>
+        </div>
     </body>
 </html>
-        

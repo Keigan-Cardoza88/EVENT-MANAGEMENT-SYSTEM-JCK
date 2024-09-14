@@ -1,26 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Simple JavaScript Example</title>
-</head>
-<body>
+document.getElementById('signInButton').addEventListener('click', function() {
+  document.getElementById('signInModal').style.display = 'flex';
+});
 
-<h1>Welcome to Event Sync!</h1>
+document.getElementById('closeModalButton').addEventListener('click', function() {
+  document.getElementById('signInModal').style.display = 'none';
+});
 
-<button id="myButton">Click Me!</button>
+document.getElementById('signInForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form from submitting
 
-<script>
-// Function to show alert
-function showAlert() {
-  alert("Button was clicked!");
-}
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
 
-// Get the button element
-var button = document.getElementById("myButton");
-
-// Add event listener to the button
-button.addEventListener("click", showAlert);
-</script>
-
-</body>
-</html>
+  if (username && password) {
+      document.getElementById('message').innerText = 'Sign-in successful!';
+  } else {
+      document.getElementById('message').innerText = 'Please fill out all fields.';
+  }
+});
