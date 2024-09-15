@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Create Event</h1>
+        <form id="eventForm">
+            <label for="eventDate">Date:</label>
+            <input type="date" id="eventDate" name="eventDate" required><br>
+
+            <label for="eventTime">Time:</label>
+            <input type="time" id="eventTime" name="eventTime" required><br>
+
+            <label for="eventVenue">Venue:</label>
+            <input type="text" id="eventVenue" name="eventVenue" required><br>
+
+            <label for="eventOrganizer">Organizer:</label>
+            <input type="text" id="eventOrganizer" name="eventOrganizer" required><br>
+
+            <label for="eventName">Event Name:</label>
+            <input type="text" id="eventName" name="eventName" required><br>
+
+            <label for="eventDescription">Description:</label>
+            <textarea id="eventDescription" name="eventDescription" required></textarea><br>
+
+            <label for="eventCategory">Category:</label>
+            <select id="eventCategory" name="eventCategory" required>
+                <option value="Comps">Comps</option>
+                <option value="EXTC">EXTC</option>
+                <option value="Mech">Mech</option>
+                <option value="IT">IT</option>
+            </select><br>
+
+            <label for="eventThumbnail">Thumbnail:</label>
+            <input type="file" id="eventThumbnail" name="eventThumbnail" accept="image/*" required><br>
+
+            <label for="eventWhoCanRegister">Who all can Register:</label>
+            <select id="eventWhoCanRegister" name="eventWhoCanRegister" multiple required>
+                <option value="Comps">Comps</option>
+                <option value="EXTC">EXTC</option>
+                <option value="Mech">Mech</option>
+                <option value="IT">IT</option>
+                <option value="IT">All</option>
+            </select><br>
+
+            <button id="submit" onclick="event_details_save()">Create Event</button>
+        </form>
+    </main>
+</body>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+</script>
+<script src="scripts.js"></script>
+
+</html>
