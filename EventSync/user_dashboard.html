@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - EventSync</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <h1>User Dashboard</h1>
+        <h2>Ongoing Events</h2>
+        <!-- PHP logic to fetch ongoing events from MySQL -->
+        <?php
+            include 'backend.php';
+            $events = getOngoingEvents(); // A function to get approved events
+            foreach($events as $event) {
+                echo "<div class='event'>";
+                echo "<h3>" . $event['name'] . "</h3>";
+                echo "<p>" . $event['description'] . "</p>";
+                echo "</div>";
+            }
+        ?>
+    </div>
+</body>
+</html>

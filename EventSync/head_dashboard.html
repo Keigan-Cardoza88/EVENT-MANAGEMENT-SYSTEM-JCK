@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Head Dashboard - EventSync</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Create Event</h1>
+        <form action="backend.php" method="POST" enctype="multipart/form-data">
+            <label>Organizer:</label>
+            <input type="text" name="organizer" required>
+            <label>Event Name:</label>
+            <input type="text" name="event_name" required>
+            <label>Purpose:</label>
+            <input type="text" name="purpose" required>
+            <label>Description:</label>
+            <textarea name="description" required></textarea>
+            <label>Public/Private:</label>
+            <select name="privacy" required>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+            </select>
+            <label>Category:</label>
+            <select name="category" required>
+                <option value="festival">Festival</option>
+                <option value="workshop">Workshop</option>
+            </select>
+            <label>Who can Register:</label>
+            <select name="who_can_register[]" multiple required>
+                <option value="comps">Comps</option>
+                <option value="extc">EXTC</option>
+                <option value="mech">Mech</option>
+                <option value="it">IT</option>
+            </select>
+            <label>Social Media Links:</label>
+            <input type="text" name="social_links" required>
+            <label>Thumbnail:</label>
+            <input type="file" name="thumbnail" required>
+            <button type="submit">Create Event</button>
+        </form>
+        
+    </div>
+</body>
+</html>
