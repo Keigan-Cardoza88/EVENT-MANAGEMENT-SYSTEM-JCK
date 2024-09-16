@@ -8,18 +8,21 @@
 </head>
 <body>
     <header>
+        <div class="logo">EventSync</div>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
+                <li><a href="ongoing-events.html">Ongoing Events</a></li>
+                <li><a href="future-events.html">Future Events</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h1>Create Event</h1>
+        <h1 style="color: black;">Create Event</h1> <br>
         <form id="eventForm">
             <label for="eventDate">Date:</label>
-            <input type="date" id="eventDate" name="eventDate" required><br>
+            <input type="date" id="eventDate" name="eventDate" style="background-color: rgba(0, 0, 0, 0); border-style: double;" required><br>
 
             <label for="eventTime">Time:</label>
             <input type="time" id="eventTime" name="eventTime" required><br>
@@ -56,20 +59,10 @@
                 <option value="IT">All</option>
             </select><br>
 
-            <button id="submit" onclick="event_details_save()">Create Event</button>
+            <button type="submit">Create Event</button>
         </form>
     </main>
+
+    <script src="scripts.js"></script>
 </body>
-
-<script type="module">
-    // Import Firebase App and Database initialization in HTML
-    import { event_details_save } from './scripts.js';
-
-    // You can bind the `event_details_save` function to a button in HTML
-    document.getElementById("submit").addEventListener("click", (event) => {
-        event.preventDefault(); // Prevent form from submitting normally
-        event_details_save(); // Call the event save function from scripts.js
-    });
-</script>
-
 </html>
