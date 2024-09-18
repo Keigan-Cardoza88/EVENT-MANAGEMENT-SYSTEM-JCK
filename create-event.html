@@ -11,7 +11,7 @@
         <div class="logo">EventSync</div>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index2.html">Home</a></li>
                 <li><a href="ongoing-events.html">Ongoing Events</a></li>
                 <li><a href="future-events.html">Future Events</a></li>
             </ul>
@@ -20,7 +20,7 @@
 
     <main>
         <h1 style="color: black;">Create Event</h1> <br>
-        <form id="eventForm">
+        <form id="eventForm" method="POST">
             <label for="eventDate">Date:</label>
             <input type="date" id="eventDate" name="eventDate" style="background-color: rgba(0, 0, 0, 0); border-style: double;" required><br>
 
@@ -41,11 +41,13 @@
 
             <label for="eventCategory">Category:</label>
             <select id="eventCategory" name="eventCategory" required>
-                <option value="Comps">Comps</option>
-                <option value="EXTC">EXTC</option>
-                <option value="Mech">Mech</option>
-                <option value="IT">IT</option>
+                <option value="Cultural">Cultural</option>
+                <option value="Technical">Technical</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Talks Session">Talks Session</option>
+                <option value="Celebration">Celebration</option>
             </select><br>
+
 
             <label for="eventThumbnail">Thumbnail:</label>
             <input type="file" id="eventThumbnail" name="eventThumbnail" accept="image/*" required><br>

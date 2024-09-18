@@ -1,4 +1,3 @@
-// Placeholder to store events from localStorage
 let events = JSON.parse(localStorage.getItem('events')) || [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,106 +22,116 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Handle sign-up form submission
+
 function handleSignUp(e) {
     e.preventDefault();
-
-    // Get form data
     const formData = new FormData(document.getElementById('signUpForm'));
 
-    // Send data to the PHP script
-    fetch('sign-up.php', {
+    fetch('sign-up-handler.php', {
         method: 'POST',
         body: formData
     })
     .then(response => response.text())
     .then(data => {
-        console.log('Sign-Up Response:', data); // Log the response for debugging
-        alert(data); // Display the response from PHP
-        if (data.trim() === 'Registration successful') {
-            document.getElementById('signUpForm').reset(); // Clear the form
-            window.location.href = 'head-index.php'; // Redirect on success
-        }
+        const trimmedData = data.trim();
+        const resultElement = document.getElementById('resultMessage');
+
+        // Display the message returned from the PHP script
+        resultElement.innerHTML = trimmedData;
+        resultElement.style.color = trimmedData.includes('successful') ? 'green' : 'red'; // Set color based on success or failure
     })
-    .catch(error => console.error('Error:', error)); // Log any errors
+    .catch(error => {
+        console.error('Error:', error);
+        const resultElement = document.getElementById('resultMessage');
+        resultElement.textContent = 'An unexpected error occurred.';
+        resultElement.style.color = 'red';
+    });
 }
+
+
+
 
 // Handle login form submission
 function handleLogin(e) {
     e.preventDefault();
-
-    // Get form data
     const formData = new FormData(document.getElementById('loginForm'));
 
-    // Send data to the PHP script
-    fetch('login.php', {
+    fetch('login-handler.php', {
         method: 'POST',
         body: formData
     })
     .then(response => response.text())
     .then(data => {
-        console.log('Login Response:', data); // Log the response for debugging
-        alert(data); // Display the response from PHP
-        if (data.trim() === 'Login successful') {
-            document.getElementById('loginForm').reset(); // Clear the form
-            window.location.href = 'head-index.php'; // Redirect on success
+        const trimmedData = data.trim();
+        const resultElement = document.getElementById('resultMessage');
+
+        if (trimmedData === 'Login successful') {
+            // Display a clickable URL instead of redirecting
+            resultElement.innerHTML = 'Login successful! <a href="index2.html">Go to Homepage</a>';
+            resultElement.style.color = 'green'; // Change color for success message
+        } else {
+            // Show the error message on the page
+            resultElement.textContent = trimmedData;
+            resultElement.style.color = 'red'; // Highlight error
         }
     })
-    .catch(error => console.error('Error:', error)); // Log any errors
+    .catch(error => {
+        console.error('Error:', error);
+        const resultElement = document.getElementById('resultMessage');
+        resultElement.textContent = 'An unexpected error occurred.';
+        resultElement.style.color = 'red';
+    });
 }
 
-// Function to create an event
+
+
+
+
+// Function to create an event with AJAX and localStorage for thumbnail
 function createEvent(e) {
     e.preventDefault();
 
-    const eventDate = new Date(document.getElementById('eventDate').value);
+    const eventDate = document.getElementById('eventDate').value;
     const eventTime = document.getElementById('eventTime').value;
     const eventVenue = document.getElementById('eventVenue').value;
     const eventOrganizer = document.getElementById('eventOrganizer').value;
     const eventName = document.getElementById('eventName').value;
     const eventDescription = document.getElementById('eventDescription').value;
     const eventCategory = document.getElementById('eventCategory').value;
-    const eventThumbnail = document.getElementById('eventThumbnail').files[0].name;
     const eventWhoCanRegister = Array.from(document.getElementById('eventWhoCanRegister').selectedOptions).map(option => option.value);
 
-    const newEvent = {
-        id: Date.now(), // Unique ID for each event
-        date: eventDate,
-        time: eventTime,
-        venue: eventVenue,
-        organizer: eventOrganizer,
-        name: eventName,
-        description: eventDescription,
-        category: eventCategory,
-        thumbnail: eventThumbnail,
-        whoCanRegister: eventWhoCanRegister
+    // Save the thumbnail to localStorage
+    const eventThumbnail = document.getElementById('eventThumbnail').files[0];
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        localStorage.setItem('eventThumbnail', event.target.result); // Store the thumbnail as a base64 string in localStorage
     };
+    reader.readAsDataURL(eventThumbnail);
 
-    events.push(newEvent);
-    localStorage.setItem('events', JSON.stringify(events));  // Save events to localStorage
+    // Create a FormData object to send the form data via AJAX
+    const formData = new FormData();
+    formData.append('eventDate', eventDate);
+    formData.append('eventTime', eventTime);
+    formData.append('eventVenue', eventVenue);
+    formData.append('eventOrganizer', eventOrganizer);
+    formData.append('eventName', eventName);
+    formData.append('eventDescription', eventDescription);
+    formData.append('eventCategory', eventCategory);
+    formData.append('eventWhoCanRegister', eventWhoCanRegister.join(', ')); // Convert array to string
 
-    alert('Event created successfully!');
-    window.location.href = 'index.html'; // Redirect after creating the event
-}
-
-// Function to display ongoing events
-function displayOngoingEvents() {
-    const today = new Date();
-    const ongoingEvents = events.filter(event => new Date(event.date).toDateString() === today.toDateString());
-    const eventList = document.getElementById('ongoingEventsList');
-    eventList.innerHTML = ''; // Clear existing list
-
-    ongoingEvents.forEach(event => {
-        const eventBlock = document.createElement('div');
-        eventBlock.classList.add('event-block');
-        eventBlock.innerHTML = `
-            <img src="${event.thumbnail}" alt="${event.name} Thumbnail">
-            <h2>${event.name}</h2>
-            <p>${event.description}</p>
-            <button onclick="showEventDetails(${event.id})">View Details</button>
-            <button onclick="deleteEvent(${event.id})">Delete</button>
-        `;
-        eventList.appendChild(eventBlock);
+    // Send the form data to PHP using fetch (AJAX)
+    fetch('create-event.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert('Event created successfully!');
+        window.location.href = 'index2.html'; // Redirect after successful creation
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to create event.');
     });
 }
 
