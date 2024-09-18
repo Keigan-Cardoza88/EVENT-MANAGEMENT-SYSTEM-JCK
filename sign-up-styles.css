@@ -1,0 +1,122 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('Images/dbit.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: top;
+}
+
+/* Header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    padding-right: 50px;
+    background-color: rgb(34, 55, 175);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0px 0px 2px 2px;
+}
+
+/* Navigation bar styling */
+.navBar {
+    display: flex;
+    flex-direction: column;
+    height: 20px;
+    margin-top: 20px;
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #b8e4f9;
+}
+
+/* Sign-up container styling */
+.signUpContainer {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #d0ffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styling */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Input fields styling */
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Submit button styling */
+input[type="submit"] {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Error message styling */
+#resultMessage {
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+    font-weight: bold;
+}

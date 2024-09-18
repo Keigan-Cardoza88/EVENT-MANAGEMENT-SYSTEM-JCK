@@ -1,4 +1,3 @@
-// Placeholder to store events from localStorage
 let events = JSON.parse(localStorage.getItem('events')) || [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,53 +22,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Handle sign-up form submission
+
 function handleSignUp(e) {
     e.preventDefault();
-
-    // Get form data
     const formData = new FormData(document.getElementById('signUpForm'));
 
-    // Send data to the PHP script
-    fetch('sign-up.php', {
+    fetch('sign-up-handler.php', {
         method: 'POST',
         body: formData
     })
     .then(response => response.text())
     .then(data => {
-        console.log('Sign-Up Response:', data); // Log the response for debugging
-        alert(data); // Display the response from PHP
-        if (data.trim() === 'Registration successful') {
-            document.getElementById('signUpForm').reset(); // Clear the form
-            window.location.href = 'head-index.php'; // Redirect on success
-        }
+        const trimmedData = data.trim();
+        const resultElement = document.getElementById('resultMessage');
+
+        // Display the message returned from the PHP script
+        resultElement.innerHTML = trimmedData;
+        resultElement.style.color = trimmedData.includes('successful') ? 'green' : 'red'; // Set color based on success or failure
     })
-    .catch(error => console.error('Error:', error)); // Log any errors
+    .catch(error => {
+        console.error('Error:', error);
+        const resultElement = document.getElementById('resultMessage');
+        resultElement.textContent = 'An unexpected error occurred.';
+        resultElement.style.color = 'red';
+    });
 }
+
+
+
 
 // Handle login form submission
 function handleLogin(e) {
     e.preventDefault();
-
-    // Get form data
     const formData = new FormData(document.getElementById('loginForm'));
 
-    // Send data to the PHP script
-    fetch('login.php', {
+    fetch('login-handler.php', {
         method: 'POST',
         body: formData
     })
     .then(response => response.text())
     .then(data => {
-        console.log('Login Response:', data); // Log the response for debugging
-        alert(data); // Display the response from PHP
-        if (data.trim() === 'Login successful') {
-            document.getElementById('loginForm').reset(); // Clear the form
-            window.location.href = 'head-index.php'; // Redirect on success
+        const trimmedData = data.trim();
+        const resultElement = document.getElementById('resultMessage');
+
+        if (trimmedData === 'Login successful') {
+            // Display a clickable URL instead of redirecting
+            resultElement.innerHTML = 'Login successful! <a href="index2.html">Go to Homepage</a>';
+            resultElement.style.color = 'green'; // Change color for success message
+        } else {
+            // Show the error message on the page
+            resultElement.textContent = trimmedData;
+            resultElement.style.color = 'red'; // Highlight error
         }
     })
-    .catch(error => console.error('Error:', error)); // Log any errors
+    .catch(error => {
+        console.error('Error:', error);
+        const resultElement = document.getElementById('resultMessage');
+        resultElement.textContent = 'An unexpected error occurred.';
+        resultElement.style.color = 'red';
+    });
 }
+
+
+
+
 
 // Function to create an event
 function createEvent(e) {
@@ -102,7 +118,7 @@ function createEvent(e) {
     localStorage.setItem('events', JSON.stringify(events));  // Save events to localStorage
 
     alert('Event created successfully!');
-    window.location.href = 'index.html'; // Redirect after creating the event
+    window.location.href = 'index.php'; // Redirect after creating the event
 }
 
 // Function to display ongoing events
