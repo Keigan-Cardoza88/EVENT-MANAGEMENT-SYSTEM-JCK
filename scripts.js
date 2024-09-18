@@ -84,9 +84,6 @@ function handleLogin(e) {
 }
 
 
-
-
-
 // Function to create an event with AJAX and localStorage for thumbnail
 function createEvent(e) {
     e.preventDefault();
