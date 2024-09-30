@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Deleted</title>
+    <link rel="stylesheet" href="create-styles.css"> <!-- Use the same CSS file -->
+    <style>
+        .centered {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="centered">
+        <h1>Event Deleted Successfully</h1>
+        <p>Your event has been deleted.</p>
+        <p>Do you want to delete more events?</p>
+        <form action="prompt.php" method="post">
+            <button type="submit" name="deleteMore" class="button">Yes, Delete More</button>
+            <button type="submit" name="noMore" class="button">No, Go Back</button>
+        </form>
+    </div>
+</body>
+</html>

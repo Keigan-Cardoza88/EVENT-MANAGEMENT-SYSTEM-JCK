@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Event</title>
+    <link rel="stylesheet" href="create-styles.css"> <!-- Use the same CSS file -->
+</head>
+<body>
+    <header>
+        <div class="logo" style="font-weight: 750;">
+            <span style="color: #380d8d; margin-left: 20px">DBIT</span> EventSync
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index2.html">Home</a></li>
+                <li><a href="delete-event.html">Delete Event</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="loginContainer">
+            <h2 style="text-align: center;">Delete Event</h2>
+            <form id="deleteEventForm" method="post" action="delete-event.php">
+                <label for="eventName">Event Name:</label>
+                <input type="text" id="eventName" name="eventName" required>
+                
+                <label for="eventOrganizer">Event Organizer (optional):</label>
+                <input type="text" id="eventOrganizer" name="eventOrganizer">
+                
+                <button type="submit">Search</button>
+            </form>
+            <div id="searchResults"></div>
+        </div>
+    </main>
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Event</title>
+    <link rel="stylesheet" href="create-styles.css">
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+
+    <header>
+        <button class="sidebar-toggle" id="sidebar-toggle" style="color: white;">☰</button>
+        <div class="logo" style="font-weight: 750;">
+            <span style="color: #380d8d; margin-left: 20px;">DBIT</span> EventSync
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index2.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <span class="close-btn" id="close-sidebar">&times;</span>
+        <ul>
+            <li><a href="create-event.html">Create Event</a></li>
+            <li><a href="ongoing-events.html">Ongoing Events</a></li>
+            <li><a href="modify-events.html">Modify Events</a></li>
+            <li><a href="delete-event.html">Delete Events</a></li>
+        </ul>
+    </div>
+
+    <h1 style="color: white; text-align: center; margin-top: 20px">Modify Event</h1>
+
+    <!-- Search Form for Event -->
+    <form id="searchEventForm">
+        <label for="eventSearchInput">Search Event by Name:</label>
+        <input type="text" id="eventSearchInput" placeholder="Enter event name" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Display Search Results -->
+    <div id="searchResults" style="margin-top: 20px;"></div>
+
+    <!-- Modify Form (Initially Hidden) -->
+    <form id="modifyEventForm" style="display: none; margin-top: 20px;">
+        <input type="hidden" id="eventId" name="eventId">
+
+        <label for="eventStartDate">Start Date:</label>
+        <input type="date" id="eventStartDate" name="eventStartDate">
+
+        <label for="eventEndDate">End Date:</label>
+        <input type="date" id="eventEndDate" name="eventEndDate">
+
+        <label for="eventTime">Time:</label>
+        <input type="time" id="eventTime" name="eventTime">
+
+        <label for="eventVenue">Venue:</label>
+        <input type="text" id="eventVenue" name="eventVenue">
+
+        <label for="eventOrganizer">Organizer:</label>
+        <input type="text" id="eventOrganizer" name="eventOrganizer">
+
+        <label for="eventName">Name:</label>
+        <input type="text" id="eventName" name="eventName">
+
+        <label for="eventDescription">Description:</label>
+        <textarea id="eventDescription" name="eventDescription"></textarea>
+
+        <label for="eventCategory">Category:</label>
+        <input type="text" id="eventCategory" name="eventCategory">
+
+        <label for="eventWhoCanRegister">Who Can Register:</label>
+        <select id="eventWhoCanRegister" name="eventWhoCanRegister" multiple>
+            <option value="Public">Public</option>
+            <option value="Private">Private</option>
+        </select>
+
+        <label for="eventDuration">Duration:</label>
+        <input type="text" id="eventDuration" name="eventDuration">
+
+        <label for="eventOrganizerEmail">Organizer Email:</label>
+        <input type="email" id="eventOrganizerEmail" name="eventOrganizerEmail">
+
+        <label for="eventOrganizerPhone">Organizer Phone:</label>
+        <input type="text" id="eventOrganizerPhone" name="eventOrganizerPhone">
+
+        <button type="submit">Modify Event</button>
+    </form>
+
+    <div id="resultMessage"></div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,37 +1,32 @@
 <?php 
-    include "db-connection.php";
-?>
-<?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "emsdb";
+include "db-connection.php";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve form data
+    $eventStartDate = $_POST['event_start_date'];
+    $eventEndDate = $_POST['event_end_date'];
+    $eventStartTime = $_POST['event_start_time']; // New field for start time
+    $eventEndTime = $_POST['event_end_time']; // New field for end time
+    $eventVenue = $_POST['eventVenue'];
+    $eventOrganizer = $_POST['eventOrganizer'];
+    $eventName = $_POST['eventName'];
+    $eventDescription = $_POST['eventDescription'];
+    $eventCategory = $_POST['eventCategory'];
+    $eventWhoCanRegister = implode(', ', $_POST['eventWhoCanRegister']); // Store as comma-separated values
+    $eventDuration = $_POST['event_duration'];
+    $eventOrganizerEmail = $_POST['event_organizer_email'];
+    $eventOrganizerPhone = $_POST['event_organizer_phone'];
 
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    // Insert data into the database
+    $sql = "INSERT INTO eventdetails (event_start_date, event_end_date, event_start_time, event_end_time, event_venue, event_organizer, event_name, event_description, event_category, event_who_can_register, event_duration, number_of_attendees, registration_count, event_organizer_email, event_organizer_phone)
+            VALUES ('$eventStartDate', '$eventEndDate', '$eventStartTime', '$eventEndTime', '$eventVenue', '$eventOrganizer', '$eventName', '$eventDescription', '$eventCategory', '$eventWhoCanRegister', '$eventDuration', 0, 0, '$eventOrganizerEmail', '$eventOrganizerPhone')";
+
+    if ($connection->query($sql) === TRUE) {
+        echo "Event created successfully!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $connection->error;
     }
+}
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $eventDate = $_POST['eventDate'];
-        $eventTime = $_POST['eventTime'];
-        $eventVenue = $_POST['eventVenue'];
-        $eventOrganizer = $_POST['eventOrganizer'];
-        $eventName = $_POST['eventName'];
-        $eventDescription = $_POST['eventDescription'];
-        $eventCategory = $_POST['eventCategory'];
-        $eventWhoCanRegister = $_POST['eventWhoCanRegister'];
-
-        $sql = "INSERT INTO eventdetails (event_date, event_time, event_venue, event_organizer, event_name, event_description, event_category, event_who_can_register)
-                VALUES ('$eventDate', '$eventTime', '$eventVenue', '$eventOrganizer', '$eventName', '$eventDescription', '$eventCategory', '$eventWhoCanRegister')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "Event created successfully!";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    }
-
-    $conn->close();
+$connection->close();
 ?>

@@ -4,28 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Event</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="create-styles.css">
 </head>
 <body>
     <header>
-        <div class="logo">EventSync</div>
+        <button class="sidebar-toggle" onclick="toggleSidebar()" style="color: white;">☰</button>
+        <div class="logo" style="font-weight: 750;">
+            <span style="color: #380d8d; margin-left: 20px">DBIT</span> EventSync
+        </div>
         <nav>
             <ul>
                 <li><a href="index2.html">Home</a></li>
-                <li><a href="ongoing-events.html">Ongoing Events</a></li>
-                <li><a href="future-events.html">Future Events</a></li>
+                <li><a href="index.html">Logout</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <h1 style="color: black;">Create Event</h1> <br>
-        <form id="eventForm" method="POST">
-            <label for="eventDate">Date:</label>
-            <input type="date" id="eventDate" name="eventDate" style="background-color: rgba(0, 0, 0, 0); border-style: double;" required><br>
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">x</button>
+        <ul>
+            <li><a href="create-event.html">Create Event</a></li>
+            <li><a href="ongoing-events.html">Ongoing Events</a></li>
+            <li><a href="modify-events.html">Modify Events</a></li>
+            <li><a href="delete-event.html">Delete Events</a></li>
+        </ul>
+    </aside>
 
-            <label for="eventTime">Time:</label>
-            <input type="time" id="eventTime" name="eventTime" required><br>
+    <!-- Dimming overlay -->
+    <div class="overlay"></div>
+
+    <!-- Main content -->
+    <main>
+        <h1 style="color: rgb(255, 255, 255); text-align: center; margin-top: 20px; margin-bottom: -20px">Create Event</h1> <br>
+        <form id="eventForm" method="POST">
+            <label for="eventStartDate">Start Date:</label>
+            <input type="date" id="eventStartDate" name="event_start_date" style="background-color: rgba(0, 0, 0, 0); border-style: double;" required><br>
+
+            <label for="eventEndDate">End Date:</label>
+            <input type="date" id="eventEndDate" name="event_end_date" style="background-color: rgba(0, 0, 0, 0); border-style: double;" required><br>
+
+            <label for="eventStartTime">Start Time:</label>
+            <input type="time" id="eventStartTime" name="event_start_time" required><br>
+
+            <label for="eventEndTime">End Time:</label>
+            <input type="time" id="eventEndTime" name="event_end_time" required><br>
 
             <label for="eventVenue">Venue:</label>
             <input type="text" id="eventVenue" name="eventVenue" required><br>
@@ -48,9 +71,8 @@
                 <option value="Celebration">Celebration</option>
             </select><br>
 
-
-            <label for="eventThumbnail">Thumbnail:</label>
-            <input type="file" id="eventThumbnail" name="eventThumbnail" accept="image/*" required><br>
+            <label for="eventDuration">Duration (hours):</label>
+            <input type="number" id="eventDuration" name="event_duration" required><br>
 
             <label for="eventWhoCanRegister">Who all can Register:</label>
             <select id="eventWhoCanRegister" name="eventWhoCanRegister" multiple required>
@@ -58,12 +80,33 @@
                 <option value="EXTC">EXTC</option>
                 <option value="Mech">Mech</option>
                 <option value="IT">IT</option>
-                <option value="IT">All</option>
+                <option value="All">All</option>
             </select><br>
+
+            <label for="eventOrganizerEmail">Organizer Email:</label>
+            <input type="email" id="eventOrganizerEmail" name="event_organizer_email" required><br>
+
+            <label for="eventOrganizerPhone">Organizer Phone:</label>
+            <input type="tel" id="eventOrganizerPhone" name="event_organizer_phone" required><br>
 
             <button type="submit">Create Event</button>
         </form>
     </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+
+            if (sidebar.style.left === '0px') {
+                sidebar.style.left = '-250px';  // Hide the sidebar
+                overlay.style.display = 'none'; // Hide the overlay
+            } else {
+                sidebar.style.left = '0px';  // Show the sidebar
+                overlay.style.display = 'block'; // Show the overlay
+            }
+        }
+    </script>
 
     <script src="scripts.js"></script>
 </body>

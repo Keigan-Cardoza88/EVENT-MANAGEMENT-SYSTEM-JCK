@@ -4,25 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ongoing Events</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ongoing-styles.css">
 </head>
 <body>
+    <!-- Overlay for dimming the background -->
+    <div class="overlay" id="overlay"></div>
+
     <header>
-        <div class="logo">EventSync</div>
+        <button class="sidebar-toggle" id="sidebar-toggle" style="color: white;">☰</button>
+        <div class="logo" style="font-weight: 750;">
+            <span style="color: #380d8d; margin-left: 20px;">DBIT</span> EventSync
+        </div>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="ongoing-events.html">Ongoing Events</a></li>
-                <li><a href="future-events.html">Future Events</a></li>
+                <li><a href="index2.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
             </ul>
         </nav>
     </header>
-
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <span class="close-btn" id="close-sidebar">&times;</span>
+        <ul>
+            <li><a href="create-event.html">Create Event</a></li>
+            <li><a href="ongoing-events.html">Ongoing Events</a></li>
+            <li><a href="modify-events.html">Modify Events</a></li>
+            <li><a href="delete-event.html">Delete Events</a></li>
+        </ul>
+    </div>
+    
+    <!-- Main content -->
     <main>
-        <h1 class="title">Ongoing Events</h1>
-        <div id="ongoingEventsList"></div>
+        <h1 class="title" style="color: white;">Ongoing Events</h1>
+        <div id="ongoingEventsList">
+            <!-- Events will be dynamically inserted here -->
+        </div>
     </main>
 
-    <script src="scripts.js"></script>
+    <!-- Inline JavaScript for displaying events and sidebar toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('ongoing-events.php')
+                .then(response => response.json())
+                .then(events => {
+                    const ongoingEventsList = document.getElementById('ongoingEventsList');
+                    ongoingEventsList.innerHTML = ''; // Clear any existing content
+
+                    events.forEach(event => {
+                        const eventDiv = document.createElement('div');
+                        eventDiv.classList.add('event');
+
+                        eventDiv.innerHTML = `
+                            <h2>${event.event_name}</h2>
+                            <p>Date: ${event.event_star_date}</p>
+                            <p>Time: ${event.event_time}</p>
+                            <p>Venue: ${event.event_venue}</p>
+                            <p>Organizer: ${event.event_organizer}</p>
+                            <p>Description: ${event.event_description}</p>
+                            <p>Category: ${event.event_category}</p>
+                            <p>Who can register: ${event.event_who_can_register}</p>
+                        `;
+
+                        ongoingEventsList.appendChild(eventDiv);
+                    });
+                })
+                .catch(error => console.error('Error fetching events:', error));
+            
+            // Sidebar Toggle Function
+            document.getElementById('sidebar-toggle').addEventListener('click', function() {
+                document.body.classList.toggle('sidebar-open');
+                document.getElementById('overlay').classList.toggle('show');
+            });
+
+            document.getElementById('close-sidebar').addEventListener('click', function() {
+                document.body.classList.remove('sidebar-open');
+                document.getElementById('overlay').classList.remove('show');
+            });
+
+            document.getElementById('overlay').addEventListener('click', function() {
+                document.body.classList.remove('sidebar-open');
+                document.getElementById('overlay').classList.remove('show');
+            });
+        });
+    </script>
 </body>
 </html>
